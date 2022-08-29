@@ -12,7 +12,9 @@ app.use(volleyball)
 
 //this is where some things should go
 
-
+app.get("*", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+  });
 
 
 
