@@ -1,20 +1,14 @@
 import React from "react";
 import Campus from "./campus";
+import { useSelector } from "react-redux";
 
 function Campuses(){
 
-    const list = [
-        {
-            id: 1,
-            name: "Fordham",
-            location: "The Bronx",
-            imageUrl: 'https://cdn.britannica.com/54/117954-004-066215F5/Keating-Hall-Fordham-University-NY-Bronx.jpg?s=1500x700&q=85'
-        }
-    ]
+    const campuses = useSelector(state=> state.campuses.data)
 
     return (
         <>
-            {list.map(itm => 
+            {campuses.map(itm => 
                 <Campus key={itm.id} data={itm}/>
             )}
         </>

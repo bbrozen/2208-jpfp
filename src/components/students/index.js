@@ -1,19 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Student from "./student";
 
 function Students(){
 
-    const list = [
-        {
-            id: 1,
-            name: "Brendan",
-            type: "undergrad"
-        }
-    ]
-
+    const students = useSelector(state=> state.students.data)
+    
     return (
         <>
-            {list.map(itm => 
+            {students.map(itm => 
                 <Student key={itm.id} data ={itm}/>
             )}
         </>
