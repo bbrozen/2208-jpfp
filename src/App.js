@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route} from "react-router-dom";
-import Students from "./components/students";
+import AllStudents from "./components/students";
 import Campuses from "./components/campuses";
 import Navigation from "./components/navigation";
 
@@ -12,9 +12,10 @@ function App(){
                 
                 <Navigation/>
                 <Routes>
-                    <Route index element={<Students/>} />
-                    <Route path={"students"} element={<Students/>} />
+                    <Route index element={<AllStudents/>} />
+                    <Route path={"students"} element={<AllStudents/>} />
                     <Route path={"campuses"} element={<Campuses/>}/>
+                    
                 </Routes>
 
             </div>

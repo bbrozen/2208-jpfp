@@ -148,11 +148,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Students() {
+function AllStudents() {
   var students = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.students.data;
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, students.map(function (itm) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, students.map(function (itm) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_student__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: itm.id,
       data: itm
@@ -160,7 +160,7 @@ function Students() {
   }));
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Students);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AllStudents);
 
 /***/ }),
 

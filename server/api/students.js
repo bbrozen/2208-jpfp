@@ -13,3 +13,22 @@ router.get('/', async (req, res, next) => {
       next(error)
     }
   })
+
+//GET a specific student and associated campus
+router.get('/:studentId', async (req, res, next) => {
+  try {
+    const singleStudent = await Student.findByPk(req.params.studentId, {
+      include: [
+          {
+            model: Campus,
+          }
+      ]
+    })
+    res.json(singleStudent)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+
+  module.exports = router;
