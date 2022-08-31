@@ -4,9 +4,7 @@ const {Campus, Student} = require('../db')
 // GET /api/students
 router.get('/', async (req, res, next) => {
     try {
-      const students = await Student.findAll({
-        attributes: ['id', 'firstName', 'lastName', 'email'],
-      })
+      const students = await Student.findAll()
       res.json(students)
     }
     catch (error) {

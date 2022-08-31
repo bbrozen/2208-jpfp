@@ -1,17 +1,36 @@
-const initState = {
-    data: [
-        {
-            id: 1,
-            name: "Fordham",
-            location: "The Bronx",
-            imageUrl: 'https://cdn.britannica.com/54/117954-004-066215F5/Keating-Hall-Fordham-University-NY-Bronx.jpg?s=1500x700&q=85'
-            
-        }
-    ]
-}
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const campusReducer = (state = initState, action) => {
-    return state;
-}
+const initialState = [];
 
-export default campusReducer
+export const fetchCampusesAsync = createAsyncThunk("allCampuses", async () => {
+    try {
+      const { data } = await axios.get(`/api/campuses`);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+const campusesSlice = createSlice({
+    name: "campuses",
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+      builder.addCase(fetchCampusesAsync.fulfilled, (state, action) => {
+        // Add campus to the state array
+        return action.payload;
+      });
+    },
+  }); 
+
+  export const selectCampuses = (state) => {
+    return state.campuses;
+  }; 
+
+export default campusesSlice.reducer;
+
+
+
+
+

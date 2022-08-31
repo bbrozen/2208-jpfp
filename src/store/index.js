@@ -1,17 +1,23 @@
 import {createStore, applyMiddleware, combineReducers} from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import studentReducer from "./studentReducer";
-import campusReducer from "./campusReducer";
 
-const rootReducer = combineReducers({
-    students: studentReducer,
-    campuses: campusReducer
-})
 
-function configureStore() {
-    // return createStore(########, applyMiddleware(thunk));
-   return createStore(rootReducer);
+import studentsSlice from "./studentReducer";
+import campusesSlice from "./campusReducer"
+import singleCampusSlice from "./singleCampusSlice";
+import singleStudentSlice from "./singleStudentSlice";
 
-}
+const store = configureStore(
+    {
+        reducer: {
+            students: studentsSlice,
+            campuses: campusesSlice,
+            singleCampus: singleCampusSlice,
+            singleStudent: singleStudentSlice
+        }
+    }
+)
 
-export default configureStore;
+export default store;
+

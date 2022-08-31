@@ -4,9 +4,7 @@ const {Campus, Student} = require('../db')
 //GET all campuses
 router.get('/', async (req, res, next) => {
     try {
-      const campuses = await Campus.findAll({
-        attributes: ['id', 'name', 'imageUrl']
-      })
+      const campuses = await Campus.findAll()
       res.json(campuses)
     }
     catch (error) {

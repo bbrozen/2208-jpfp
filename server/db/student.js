@@ -18,10 +18,12 @@ const Student = db.define('students',{
         notEmpty: true,
         isEmail: true,
     },  
-    imgaeUrl: {
+    imageUrl: {
         type: Sequelize.STRING,
+        defaultValue: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
         isUrl: true,
-        defaultValue: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+        allowNull: false,
+        notEmpty: true,
     },
     gpa: {
         type: Sequelize.DOUBLE,
