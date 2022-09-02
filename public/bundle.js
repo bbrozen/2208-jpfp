@@ -4388,12 +4388,16 @@ function CampusPage() {
   var params = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)();
   var campusId = params.id;
   var singleCampus = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_store_singleCampusSlice__WEBPACK_IMPORTED_MODULE_2__.selectSingleCampus);
-  var students = singleCampus.students;
+  var students = [];
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_store_singleCampusSlice__WEBPACK_IMPORTED_MODULE_2__.fetchSingleCampus)(campusId));
   }, [dispatch]);
-  console.log(students);
+
+  if (singleCampus.students) {
+    students = singleCampus.students;
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, singleCampus.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Address: ", singleCampus.address), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: singleCampus.imageUrl,
     alt: "campus photo"
@@ -4406,6 +4410,92 @@ function CampusPage() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CampusPage);
+
+/***/ }),
+
+/***/ "./src/components/campuses/CreateCampus.js":
+/*!*************************************************!*\
+  !*** ./src/components/campuses/CreateCampus.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_campusReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/campusReducer */ "./src/store/campusReducer.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+function CreateCampus() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      campusName = _useState2[0],
+      setCampusName = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      address = _useState4[0],
+      setAddress = _useState4[1];
+
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  var handleSubmit = function handleSubmit(evt) {
+    evt.preventDefault();
+    dispatch((0,_store_campusReducer__WEBPACK_IMPORTED_MODULE_2__.addCampusAsync)({
+      name: campusName,
+      address: address
+    }));
+    setAddress("");
+    setCampusName("");
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    id: "campus-form",
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "campusName"
+  }, "Campus Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    name: "campusName",
+    value: campusName,
+    onChange: function onChange(e) {
+      return setCampusName(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "address"
+  }, "Address:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    name: "address",
+    value: address,
+    onChange: function onChange(e) {
+      return setAddress(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "submit"
+  }, "Submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/"
+  }, "Cancel"));
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateCampus);
 
 /***/ }),
 
@@ -4455,6 +4545,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _campus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./campus */ "./src/components/campuses/campus.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_campusReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/campusReducer */ "./src/store/campusReducer.js");
+/* harmony import */ var _CreateCampus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CreateCampus */ "./src/components/campuses/CreateCampus.js");
+
+
+
+
 
 
 
@@ -4462,12 +4557,16 @@ __webpack_require__.r(__webpack_exports__);
 
 function Campuses() {
   var campuses = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_store_campusReducer__WEBPACK_IMPORTED_MODULE_3__.selectCampuses);
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    dispatch((0,_store_campusReducer__WEBPACK_IMPORTED_MODULE_3__.fetchCampusesAsync)());
+  }, [dispatch]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, campuses && campuses.length ? campuses.map(function (itm) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_campus__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: itm.id,
       data: itm
     });
-  }) : null);
+  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CreateCampus__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Campuses);
@@ -4500,6 +4599,107 @@ function Navigation() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Navigation);
+
+/***/ }),
+
+/***/ "./src/components/students/CreateStudent.js":
+/*!**************************************************!*\
+  !*** ./src/components/students/CreateStudent.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_studentReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/studentReducer */ "./src/store/studentReducer.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+function CreateStudent() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      firstName = _useState2[0],
+      setFirstName = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      lastName = _useState4[0],
+      setLastName = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      email = _useState6[0],
+      setEmail = _useState6[1];
+
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  var handleSubmit = function handleSubmit(evt) {
+    evt.preventDefault();
+    dispatch((0,_store_studentReducer__WEBPACK_IMPORTED_MODULE_2__.addStudentAsync)({
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+    }));
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    id: "student-form",
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "firstName"
+  }, "First Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    name: "firstName",
+    value: firstName,
+    onChange: function onChange(e) {
+      return setFirstName(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "lastName"
+  }, "Last Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    name: "lastName",
+    value: lastName,
+    onChange: function onChange(e) {
+      return setLastName(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "email"
+  }, "Email::"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    name: "email",
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "submit"
+  }, "Submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/"
+  }, "Cancel"));
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateStudent);
 
 /***/ }),
 
@@ -4563,6 +4763,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _student__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./student */ "./src/components/students/student.js");
 /* harmony import */ var _store_studentReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/studentReducer */ "./src/store/studentReducer.js");
+/* harmony import */ var _CreateStudent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CreateStudent */ "./src/components/students/CreateStudent.js");
+
+
+
 
 
 
@@ -4570,12 +4774,16 @@ __webpack_require__.r(__webpack_exports__);
 
 function AllStudents() {
   var students = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_store_studentReducer__WEBPACK_IMPORTED_MODULE_3__.selectStudents);
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    dispatch((0,_store_studentReducer__WEBPACK_IMPORTED_MODULE_3__.fetchStudentsAsync)());
+  }, [dispatch]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, students && students.length ? students.map(function (itm) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_student__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: itm.id,
       data: itm
     });
-  }) : null);
+  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CreateStudent__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AllStudents);
@@ -4621,6 +4829,7 @@ function Student(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addCampusAsync": () => (/* binding */ addCampusAsync),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "fetchCampusesAsync": () => (/* binding */ fetchCampusesAsync),
 /* harmony export */   "selectCampuses": () => (/* binding */ selectCampuses)
@@ -4667,6 +4876,44 @@ var fetchCampusesAsync = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.create
     }
   }, _callee, null, [[0, 8]]);
 })));
+var addCampusAsync = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createAsyncThunk)("campuses/addCampus", /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(_ref2) {
+    var name, address, _yield$axios$post, data;
+
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            name = _ref2.name, address = _ref2.address;
+            _context2.prev = 1;
+            _context2.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/campuses", {
+              name: name,
+              address: address
+            });
+
+          case 4:
+            _yield$axios$post = _context2.sent;
+            data = _yield$axios$post.data;
+            return _context2.abrupt("return", data);
+
+          case 9:
+            _context2.prev = 9;
+            _context2.t0 = _context2["catch"](1);
+            console.error(_context2.t0.response.data);
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[1, 9]]);
+  }));
+
+  return function (_x) {
+    return _ref3.apply(this, arguments);
+  };
+}());
 var campusesSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice)({
   name: "campuses",
   initialState: initialState,
@@ -4675,6 +4922,9 @@ var campusesSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice
     builder.addCase(fetchCampusesAsync.fulfilled, function (state, action) {
       // Add campus to the state array
       return action.payload;
+    });
+    builder.addCase(addCampusAsync.fulfilled, function (state, action) {
+      state.push(action.payload);
     });
   }
 });
@@ -4761,19 +5011,20 @@ var fetchSingleCampus = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createA
           case 3:
             _yield$axios$get = _context.sent;
             data = _yield$axios$get.data;
+            console.log(data);
             return _context.abrupt("return", data);
 
-          case 8:
-            _context.prev = 8;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
 
-          case 11:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function (_x) {
@@ -4898,6 +5149,7 @@ var selectSingleStudent = function selectSingleStudent(state) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addStudentAsync": () => (/* binding */ addStudentAsync),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "fetchStudentsAsync": () => (/* binding */ fetchStudentsAsync),
 /* harmony export */   "selectStudents": () => (/* binding */ selectStudents)
@@ -4944,6 +5196,45 @@ var fetchStudentsAsync = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.create
     }
   }, _callee, null, [[0, 8]]);
 })));
+var addStudentAsync = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createAsyncThunk)("campuses/addStudent", /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(_ref2) {
+    var firstName, lastName, email, _yield$axios$post, data;
+
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            firstName = _ref2.firstName, lastName = _ref2.lastName, email = _ref2.email;
+            _context2.prev = 1;
+            _context2.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/students", {
+              firstName: firstName,
+              lastName: lastName,
+              email: email
+            });
+
+          case 4:
+            _yield$axios$post = _context2.sent;
+            data = _yield$axios$post.data;
+            return _context2.abrupt("return", data);
+
+          case 9:
+            _context2.prev = 9;
+            _context2.t0 = _context2["catch"](1);
+            console.error(_context2.t0.response.data);
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[1, 9]]);
+  }));
+
+  return function (_x) {
+    return _ref3.apply(this, arguments);
+  };
+}());
 var studentsSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice)({
   name: "students",
   initialState: initialState,
@@ -4952,6 +5243,9 @@ var studentsSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice
     builder.addCase(fetchStudentsAsync.fulfilled, function (state, action) {
       // Add student to the state array
       return action.payload;
+    });
+    builder.addCase(addStudentAsync.fulfilled, function (state, action) {
+      state.push(action.payload);
     });
   }
 });

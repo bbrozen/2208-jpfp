@@ -12,6 +12,7 @@ app.use(volleyball)
 
 //this is where some things should go
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", require("./api"));
 

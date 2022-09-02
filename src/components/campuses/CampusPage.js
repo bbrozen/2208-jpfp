@@ -7,8 +7,9 @@ function CampusPage(){
    const params = useParams();
    const campusId = params.id;
    const singleCampus = useSelector(selectSingleCampus);
-   const students = singleCampus.students;
-
+   let students = [];
+   
+   
 
    const dispatch = useDispatch();
 
@@ -16,7 +17,11 @@ function CampusPage(){
     dispatch(fetchSingleCampus(campusId));
   }, [dispatch]);
 
-  console.log(students);
+
+   if(singleCampus.students){
+      students = singleCampus.students;
+   }
+
   return(
     <div>
             <h1>{singleCampus.name}</h1>
