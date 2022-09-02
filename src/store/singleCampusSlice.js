@@ -6,27 +6,13 @@ export const fetchSingleCampus = createAsyncThunk(
     "singleCampus",
     async (id) => {
       try {
-       
         const { data } = await axios.get(`/api/campuses/${id}`);
-        console.log(data)
         return data;
       } catch (err) {
         console.log(err);
       }
     }
 );
-
-// export const fetchCampusStudents = createAsyncThunk(
-//     "singleCampusStudents",
-//     async (id) => {
-//       try {
-//         const { data } = await axios.get(`/api/campuses/${id}`);
-//         return data.students;
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     }
-// );
 
 const initialState = [];
 

@@ -44,4 +44,14 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const deletedCampus = await Campus.findByPk(req.params.id);
+    await deletedCampus.destroy();
+    res.send(deletedCampus);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

@@ -106,21 +106,21 @@ Congrats! You have completed your third vertical slice! Make sure to `commit -m 
 
 #### Frontend
 
-- [ ] In the all-campuses view, include an `X` button next to each campus
+- [x] In the all-campuses view, include an `X` button next to each campus
 - Clicking the `X` button should:
 
-  - [ ] Make an AJAX request that causes that campus to be removed from database
-  - [ ] Remove the campus from the list of campuses without needing to refresh the page
+  - [x] Make an AJAX request that causes that campus to be removed from database
+  - [x] Remove the campus from the list of campuses without needing to refresh the page
 
-- [ ] In the all-students view, include an `X` button next to each student
+- [x] In the all-students view, include an `X` button next to each student
 - Clicking the `X` button should:
-  - [ ] Make an AJAX request that causes that student to be removed from database
-  - [ ] Remove the student from the list of students without needing to refresh the page
+  - [x] Make an AJAX request that causes that student to be removed from database
+  - [x] Remove the student from the list of students without needing to refresh the page
 
 #### Backend
 
-- [ ] Write a route to remove a campus (based on its id)
-- [ ] Write a route to remove a student (based on their id)
+- [x] Write a route to remove a campus (based on its id)
+- [x] Write a route to remove a student (based on their id)
 
 Congrats! You have completed your fourth vertical slice! Make sure to `commit -m "Feature: Remove Campus and Student"` before moving on (see RUBRIC.md - points are awarded/deducted for a proper git workflow)!
 
@@ -155,18 +155,6 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
 ### Bonus Tier: Finishing Touches (23 EC)
 
 <details>
-
-#### Testing
-
-- Write the following tests, each marked with a \*\*\* in the tests directory
-  - [ ] React (AllCampuses): renders "No Campuses" if passed an empty array of campuses
-  - [ ] React (AllStudents): renders "No Students" if passed an empty array of students
-  - [ ] Redux (campuses): returns the initial state by default
-  - [ ] Redux (students): returns the initial state by default
-  - [ ] Express: GET /api/students responds with all students
-  - [ ] Sequelize (Campus): requires name and address
-  - [ ] Sequelize (Student): email must be a valid email
-  - [ ] Navigation: navbar to navigate to home, campuses, students
 
 #### Finishing Touches
 
