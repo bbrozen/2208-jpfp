@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { editCampusAsync } from "./campusReducer";
+import { unregisterStudentAsync } from "./campusReducer";
 
 
 export const fetchSingleCampus = createAsyncThunk(
@@ -23,6 +25,12 @@ const singleCampusSlice = createSlice({
     extraReducers: (builder) => {
       builder.addCase(fetchSingleCampus.fulfilled, (state, action) => {
         // Add campus to the state array
+        return action.payload;
+      });
+      builder.addCase(editCampusAsync.fulfilled, (state, action) => {
+        return action.payload;
+      });
+      builder.addCase(unregisterStudentAsync.fulfilled, (state, action) => {
         return action.payload;
       });
     },

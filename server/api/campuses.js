@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
 //GET a specific campus and all associated students
 router.get('/:campusId', async (req, res, next) => {
   try {
-    console.log(req.params.campusId)
+   
     const singleCampus = await Campus.findByPk(req.params.campusId, {
       include: [
           {
@@ -26,7 +26,7 @@ router.get('/:campusId', async (req, res, next) => {
           }
       ]
     })
-    console.log(singleCampus);
+
     res.json(singleCampus)
   }
   catch (error) {
@@ -49,6 +49,23 @@ router.delete('/:id', async (req, res, next) => {
     const deletedCampus = await Campus.findByPk(req.params.id);
     await deletedCampus.destroy();
     res.send(deletedCampus);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const campus = await Campus.findByPk(req.params.id)
+
+    if(req.body.studentId){
+      const student = await Student.findByPk(req.body.studentId);
+      campus.removeStudent(student);
+      res.send(campus);
+    }
+    else{
+      res.send(await campus.update(req.body));
+    }
   } catch (error) {
     next(error);
   }

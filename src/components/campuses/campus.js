@@ -28,6 +28,8 @@ function Campus(props){
                 <button onClick={handleDelete}>X</button>
             </div>
 
+    
+
         </div>
     )
 }

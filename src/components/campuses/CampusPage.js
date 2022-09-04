@@ -2,25 +2,28 @@ import React, { useEffect } from "react";
 import { Routes, Route, NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleCampus, selectSingleCampus } from "../../store/singleCampusSlice";
+import { unregisterStudentAsync } from "../../store/campusReducer";
+import EditCampus from "./EditCampus";
 
 function CampusPage(){
    const params = useParams();
    const campusId = params.id;
    const singleCampus = useSelector(selectSingleCampus);
-   let students = [];
-   
-   
 
    const dispatch = useDispatch();
 
+   let studentsList = [];
+   singleCampus.students ? studentsList = singleCampus.students : studentsList = [];
+
    useEffect(() => {
     dispatch(fetchSingleCampus(campusId));
-  }, [dispatch]);
+   }, [dispatch]);
 
-
-   if(singleCampus.students){
-      students = singleCampus.students;
-   }
+  const handleUnregister = async (evt, studentId) => {
+    evt.preventDefault();
+    const id = campusId;
+    await dispatch(unregisterStudentAsync({id, studentId}))
+  }; 
 
   return(
     <div>
@@ -28,15 +31,20 @@ function CampusPage(){
             <p>Address: {singleCampus.address}</p>
             <img src={singleCampus.imageUrl} alt='campus photo'/> 
             <ul>Students:
-                {students && students.length ?
-                        students.map(itm =>
+                {studentsList && studentsList.length ?
+                        studentsList.map(itm =>
                             <NavLink to={`/students/${itm.id}`} key ={itm.id}>
                                 <li>{itm.firstName} {itm.lastName}</li>
+                                <div className = "button">
+                                  <button onClick={(e) => handleUnregister(e, itm.id)}>Unregister</button>
+                                </div>  
                             </NavLink> 
                         )
                 :<li>Sorry, no students yet!</li>
                 }
+
             </ul>
+            <EditCampus/>
     </div>
   )
 }

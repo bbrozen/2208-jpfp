@@ -21,7 +21,7 @@ function Student(props){
     return (
         <div>
             <h1>{props.data.firstName} {props.data.lastName}</h1>
-            <NavLink to={`/campuses/${props.data.id}`}>Link to single student view</NavLink>  
+            <NavLink to={`/students/${props.data.id}`}>Link to single student view</NavLink>  
             <p>{props.data.email}</p>
             <img src={props.data.imageUrl}/>
               

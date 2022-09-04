@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { editStudentAsync } from "./studentReducer"
 
 
 export const fetchSingleStudent = createAsyncThunk(
     "singleStudent",
     async (id) => {
       try {
-        console.log(id)
+        
         const { data } = await axios.get(`/api/students/${id}`);
-        console.log(data)
+      
         return data;
       } catch (err) {
         console.log(err);
@@ -27,6 +28,9 @@ const singleStudentSlice = createSlice({
         // Add student to the state array
         return action.payload;
       });
+      builder.addCase(editStudentAsync.fulfilled, (state, action) => {
+        return action.payload;
+      });
     },
   }); 
 
@@ -34,4 +38,4 @@ export const selectSingleStudent = (state) => {
     return state.singleStudent;
   }; 
 
-export default singleStudentSlice .reducer;
+export default singleStudentSlice.reducer;

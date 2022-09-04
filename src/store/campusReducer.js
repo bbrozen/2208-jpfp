@@ -35,6 +35,28 @@ export const deleteCampusAsync = createAsyncThunk(
   }
 );
 
+export const editCampusAsync = createAsyncThunk(
+  "campuses/editCampus",
+  async ({ id, name, address }) => {
+    const { data } = await axios.put(`/api/campuses/${id}`, {
+      name,
+      address,
+    });
+    return data;
+  }
+);
+
+export const unregisterStudentAsync = createAsyncThunk(
+  "campuses/unregisterStudentCampus",
+  async ({ id, studentId }) => {
+
+    const { data } = await axios.put(`/api/campuses/${id}`, {
+      studentId
+    });
+    return data;
+  }
+);
+
 const campusesSlice = createSlice({
     name: "campuses",
     initialState,
@@ -50,6 +72,12 @@ const campusesSlice = createSlice({
       builder.addCase(deleteCampusAsync.fulfilled, (state, action) => {
         const newState = state.filter((campus) => campus.id !== action.payload.id);
         return newState;
+      });
+      builder.addCase(editCampusAsync.fulfilled, (state, action) => {
+        return action.payload;
+      });
+      builder.addCase(unregisterStudentAsync.fulfilled, (state, action) => {
+        return action.payload;
       });
     },
   }); 
