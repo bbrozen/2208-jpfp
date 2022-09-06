@@ -2,13 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { editCampusAsync } from "./campusReducer";
 import { unregisterStudentAsync } from "./campusReducer";
-
+import { addCampusAsync } from "./campusReducer";
 
 export const fetchSingleCampus = createAsyncThunk(
     "singleCampus",
     async (id) => {
       try {
         const { data } = await axios.get(`/api/campuses/${id}`);
+        console.log(data)
         return data;
       } catch (err) {
         console.log(err);
@@ -33,6 +34,7 @@ const singleCampusSlice = createSlice({
       builder.addCase(unregisterStudentAsync.fulfilled, (state, action) => {
         return action.payload;
       });
+      
     },
   }); 
 

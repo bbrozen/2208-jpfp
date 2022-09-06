@@ -22,10 +22,10 @@ function StudentPage(){
                 <p>gpa: {singleStudent.gpa}</p>
                 <img src={singleStudent.imageUrl} alt='student photo'/> 
                 {singleStudent.campusId ? 
-                <NavLink to={`/campuses/${singleStudent.campusId}`} key={singleStudent.campusId}>
-                    <p>Link to campus</p>
-                </NavLink>
-                    :<p>No university listed"</p> }
+                    <NavLink to={`/campuses/${singleStudent.campusId}`} key={singleStudent.campusId}>
+                        <p>Link to campus</p>
+                    </NavLink>
+                        :<p>No university listed</p> }
                 <EditStudent/>
         </div>
     )

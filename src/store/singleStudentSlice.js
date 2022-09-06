@@ -4,12 +4,10 @@ import { editStudentAsync } from "./studentReducer"
 
 
 export const fetchSingleStudent = createAsyncThunk(
-    "singleStudent",
+    "singleStudent/fetch",
     async (id) => {
       try {
-        
         const { data } = await axios.get(`/api/students/${id}`);
-      
         return data;
       } catch (err) {
         console.log(err);

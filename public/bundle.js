@@ -4400,12 +4400,13 @@ function CampusPage() {
   var params = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)();
   var campusId = params.id;
   var singleCampus = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_store_singleCampusSlice__WEBPACK_IMPORTED_MODULE_2__.selectSingleCampus);
+  console.log(singleCampus);
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   var studentsList = [];
   singleCampus.students ? studentsList = singleCampus.students : studentsList = [];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_store_singleCampusSlice__WEBPACK_IMPORTED_MODULE_2__.fetchSingleCampus)(campusId));
-  }, [dispatch]);
+  }, [dispatch, campusId]);
 
   var handleUnregister = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(evt, studentId) {
@@ -5097,7 +5098,7 @@ function StudentPage() {
   }), singleStudent.campusId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
     to: "/campuses/".concat(singleStudent.campusId),
     key: singleStudent.campusId
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Link to campus")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "No university listed\""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_EditStudent__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Link to campus")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "No university listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_EditStudent__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StudentPage);
@@ -5508,6 +5509,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 var fetchSingleCampus = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.createAsyncThunk)("singleCampus", /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(id) {
     var _yield$axios$get, data;
@@ -5523,19 +5525,20 @@ var fetchSingleCampus = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.createA
           case 3:
             _yield$axios$get = _context.sent;
             data = _yield$axios$get.data;
+            console.log(data);
             return _context.abrupt("return", data);
 
-          case 8:
-            _context.prev = 8;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
 
-          case 11:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function (_x) {
@@ -5595,7 +5598,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var fetchSingleStudent = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.createAsyncThunk)("singleStudent", /*#__PURE__*/function () {
+var fetchSingleStudent = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.createAsyncThunk)("singleStudent/fetch", /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(id) {
     var _yield$axios$get, data;
 

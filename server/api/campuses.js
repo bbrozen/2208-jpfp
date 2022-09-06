@@ -14,19 +14,17 @@ router.get('/', async (req, res, next) => {
 
 //GET a specific campus and all associated students
 router.get('/:campusId', async (req, res, next) => {
-  try {
-   
+  try { 
+    console.log(req.params.campusId)
     const singleCampus = await Campus.findByPk(req.params.campusId, {
       include: [
           {
-            model: Student,
-            where:{
-              campusId : req.params.campusId
-            }
+            model: Student
           }
       ]
     })
-
+    console.log("single campus: ")
+    console.log(singleCampus)
     res.json(singleCampus)
   }
   catch (error) {
@@ -39,7 +37,6 @@ router.post('/', async (req, res, next) => {
     const newCampus = await Campus.create(req.body);
     res.status(201).json(newCampus); 
   } catch (error) {
-    console.error(error.response)
     next(error);
   }
 });

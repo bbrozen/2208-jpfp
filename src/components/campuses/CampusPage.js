@@ -9,15 +9,18 @@ function CampusPage(){
    const params = useParams();
    const campusId = params.id;
    const singleCampus = useSelector(selectSingleCampus);
+   console.log(singleCampus)
 
    const dispatch = useDispatch();
 
    let studentsList = [];
    singleCampus.students ? studentsList = singleCampus.students : studentsList = [];
 
+   
+
    useEffect(() => {
     dispatch(fetchSingleCampus(campusId));
-   }, [dispatch]);
+   }, [dispatch, campusId]);
 
   const handleUnregister = async (evt, studentId) => {
     evt.preventDefault();
